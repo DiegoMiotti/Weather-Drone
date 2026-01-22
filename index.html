@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drone Weather Checker - DJI Mini 2</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚁</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1><i class="fas fa-drone"></i> Drone Weather Checker</h1>
+                <p class="subtitle">Verifica condiciones para volar tu <strong>DJI Mini 2</strong></p>
+            </div>
+        </header>
+
+        <main>
+            <!-- Search Section -->
+            <section class="search-section">
+                <div class="search-box">
+                    <div class="location-display">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span id="current-location">Buenos Aires</span>
+                    </div>
+                    <div class="search-input-container">
+                        <input type="text" id="city-input" placeholder="Buscar ciudad...">
+                        <button id="search-btn"><i class="fas fa-search"></i></button>
+                    </div>
+                    <div id="search-results" class="search-results"></div>
+                </div>
+            </section>
+
+            <!-- Status Banner -->
+            <section class="status-section">
+                <div id="status-banner" class="status-banner safe">
+                    <div class="status-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="status-text">
+                        <h2 id="status-title">CONDICIONES ÓPTIMAS</h2>
+                        <p id="status-desc">Ideal para volar tu DJI Mini 2</p>
+                    </div>
+                    <div class="status-details-btn">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                </div>
+            </section>
+<section class="status-section">
+    <div id="status-banner" class="status-banner safe">
+        <div class="status-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="status-text">
+            <h2 id="status-title">CONDICIONES ÓPTIMAS</h2>
+            <p id="status-desc">Ideal para volar tu DJI Mini 2</p>
+        </div>
+        <div class="status-actions">
+            <button id="details-btn" class="details-btn">
+                <i class="fas fa-info-circle"></i> Detalles
+            </button>
+        </div>
+    </div>
+</section>
+            <!-- Weather Grid -->
+            <section class="weather-grid">
+                <div class="grid-item">
+                    <div class="grid-icon">
+                        <i class="fas fa-thermometer-half"></i>
+                    </div>
+                    <div class="grid-content">
+                        <h3>Temperatura</h3>
+                        <p class="grid-value" id="temp-value">22°C</p>
+                        <p class="grid-subtext">Ideal: 0°C a 40°C</p>
+                    </div>
+                </div>
+
+                <div class="grid-item">
+                    <div class="grid-icon">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                    <div class="grid-content">
+                        <h3>Viento</h3>
+                        <p class="grid-value" id="wind-value">12 km/h</p>
+                        <p class="grid-subtext">Límite: 29 km/h</p>
+                    </div>
+                </div>
+
+                <div class="grid-item">
+                    <div class="grid-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <div class="grid-content">
+                        <h3>Ráfagas</h3>
+                        <p class="grid-value" id="gust-value">18 km/h</p>
+                        <p class="grid-subtext">Límite: 38 km/h</p>
+                    </div>
+                </div>
+
+                <div class="grid-item">
+                    <div class="grid-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <div class="grid-content">
+                        <h3>Nubes</h3>
+                        <p class="grid-value" id="cloud-value">30%</p>
+                        <p class="grid-subtext">Máx recomendado: 70%</p>
+                    </div>
+                </div>
+
+                <div class="grid-item">
+                    <div class="grid-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <div class="grid-content">
+                        <h3>Lluvia</h3>
+                        <p class="grid-value" id="rain-value">5%</p>
+                        <p class="grid-subtext">Máx: 20%</p>
+                    </div>
+                </div>
+
+                <div class="grid-item">
+                    <div class="grid-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="grid-content">
+                        <h3>Visibilidad</h3>
+                        <p class="grid-value" id="vis-value">10 km</p>
+                        <p class="grid-subtext">Mínimo: 3 km</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hour Forecast -->
+            <section class="forecast-section">
+                <h3><i class="fas fa-clock"></i> Pronóstico por horas</h3>
+                <div class="hour-slider">
+                    <input type="range" id="hour-slider" min="0" max="23" value="0">
+                    <div class="slider-labels">
+                        <span>0:00</span>
+                        <span id="current-hour">12:00</span>
+                        <span>23:00</span>
+                    </div>
+                </div>
+                <div class="hour-display">
+                    <div class="hour-card active">
+                        <div class="hour-time" id="selected-hour">12:00</div>
+                        <div class="hour-status safe"><i class="fas fa-check"></i></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DJI Mini 2 Info -->
+            <section class="drone-info">
+                <div class="drone-specs">
+                    <h3><i class="fas fa-info-circle"></i> Especificaciones DJI Mini 2</h3>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <i class="fas fa-wind"></i>
+                            <span>Viento máximo: 29 km/h</span>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-temperature-low"></i>
+                            <span>Temperatura: 0°C a 40°C</span>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-cloud-rain"></i>
+                            <span>No es resistente al agua</span>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-battery-full"></i>
+                            <span>Vuelo: 31 minutos</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recommendations -->
+            <section class="recommendations">
+                <h3><i class="fas fa-lightbulb"></i> Recomendaciones</h3>
+                <div id="recommendations-list">
+                    <p class="recommendation positive"><i class="fas fa-check"></i> Condiciones óptimas para vuelo</p>
+                    <p class="recommendation positive"><i class="fas fa-check"></i> Viento dentro de límites seguros</p>
+                    <p class="recommendation positive"><i class="fas fa-check"></i> Buena visibilidad</p>
+                </div>
+            </section>
+        </main>
+<div id="details-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-exclamation-triangle"></i> Detalles de las condiciones</h3>
+            <button id="close-modal" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div id="modal-content">
+                <!-- Contenido dinámico -->
+            </div>
+        </div>
+    </div>
+</div>
+        <footer>
+            <p>Drone Weather Checker - Para uso con DJI Mini 2</p>
+            <p class="footer-note">Datos meteorológicos de Open-Meteo API</p>
+            <p class="footer-note">Actualizado: <span id="update-time">--:--</span></p>
+        </footer>
+    </div>
+
+    <!-- Loading Modal -->
+    <div id="loading-modal" class="modal">
+        <div class="modal-content">
+            <div class="loader"></div>
+            <p>Cargando datos meteorológicos...</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
